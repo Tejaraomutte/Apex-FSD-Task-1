@@ -1,0 +1,361 @@
+:root {
+    --bg: #f7f4ee;
+    --panel: #fffdf8;
+    --ink: #1f1b16;
+    --brand: #b44b2a;
+    --brand-dark: #8a361d;
+    --line: #dfd3c3;
+    --muted: #6a5f54;
+    --shadow: 0 10px 30px rgba(46, 33, 20, 0.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background:
+        radial-gradient(circle at top right, #ffe6bf 0, transparent 38%),
+        radial-gradient(circle at bottom left, #f8d2cf 0, transparent 42%),
+        var(--bg);
+    line-height: 1.55;
+}
+
+.site-header,
+.site-nav,
+main,
+footer {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+}
+
+.site-header {
+    padding: 2.2rem 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    animation: fade-slide 700ms ease-out;
+}
+
+.eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+h1 {
+    margin: 0.25rem 0;
+    font-size: clamp(1.6rem, 3vw, 2.7rem);
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--muted);
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.1rem;
+}
+
+.site-nav a,
+.cta,
+button {
+    text-decoration: none;
+    background: var(--brand);
+    color: #fff;
+    border: 0;
+    padding: 0.62rem 1rem;
+    border-radius: 0.65rem;
+    transition: transform 160ms ease, background 200ms ease, box-shadow 200ms ease;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.site-nav a:hover,
+.cta:hover,
+button:hover {
+    background: var(--brand-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(91, 36, 19, 0.24);
+}
+
+main {
+    display: grid;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.panel {
+    background: linear-gradient(180deg, #fffdf9 0%, #fff9f0 100%);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.1rem;
+    box-shadow: var(--shadow);
+}
+
+.grid-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid #eed9be;
+    background: #fffcf6;
+    border-radius: 0.8rem;
+    padding: 0.9rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+label,
+fieldset {
+    display: block;
+    margin: 0.6rem 0;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    margin-top: 0.35rem;
+    padding: 0.62rem;
+    border: 1px solid #ccbba7;
+    border-radius: 0.58rem;
+    background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #ffbc85;
+    border-color: #bd6846;
+}
+
+fieldset {
+    border: 1px solid #dbc6aa;
+    border-radius: 0.58rem;
+    padding: 0.55rem;
+}
+
+fieldset label,
+.checkbox-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-right: 0.7rem;
+}
+
+.validation-message {
+    color: #9b1c1c;
+    min-height: 1.3rem;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.media-grid > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: #fffcf6;
+    border: 1px solid #e8dccf;
+    border-radius: 0.6rem;
+}
+
+.media-grid h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--brand);
+}
+
+audio {
+    width: 100%;
+    border-radius: 0.4rem;
+    background: #f5f0e8;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border-radius: 0.4rem;
+    background: #000;
+}
+
+iframe {
+    border: 1px solid #d9c4aa;
+    border-radius: 0.55rem;
+    width: 100%;
+    height: 220px;
+    background: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 0.6rem;
+    font-size: 0.9rem;
+}
+
+thead {
+    background: #ca6740;
+    color: #fff;
+    position: sticky;
+    top: 0;
+}
+
+th,
+td {
+    border: 1px solid #dbc8b1;
+    padding: 0.8rem;
+    text-align: left;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+th {
+    font-weight: 700;
+    min-width: 80px;
+}
+
+tbody tr:nth-child(even) {
+    background: #fff7ee;
+}
+
+tbody tr:hover {
+    background: #fff0e0;
+}
+
+tfoot {
+    background: #f3e3d0;
+    font-weight: 600;
+}
+
+/* Table Actions Styling */
+td:last-child {
+    min-width: 200px;
+}
+
+td:last-child form {
+    margin-bottom: 0.6rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+td:last-child select,
+td:last-child textarea {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+    width: auto;
+    flex: 1;
+    min-width: 120px;
+}
+
+td:last-child textarea {
+    width: 100%;
+}
+
+td:last-child button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Wrapper for horizontal scroll on mobile */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 0.6rem;
+    box-shadow: inset 0 0 0 1px #dbc8b1;
+}
+
+footer {
+    padding: 1rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#skillsList {
+    padding-left: 1rem;
+}
+
+@keyframes fade-slide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 860px) {
+    .form-grid,
+    .media-grid,
+    .grid-two {
+        grid-template-columns: 1fr;
+    }
+
+    .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .media-grid > div {
+        padding: 0.6rem;
+    }
+
+    iframe {
+        height: 280px;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th,
+    td {
+        padding: 0.5rem;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    td:last-child {
+        min-width: 240px;
+    }
+
+    td:last-child form {
+        flex-direction: column;
+    }
+
+    td:last-child select,
+    td:last-child textarea,
+    td:last-child button {
+        width: 100%;
+    }
+}

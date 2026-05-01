@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1 | Portfolio Foundation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Internal CSS example */
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: #f3d9b1;
+            color: #2f1a00;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header" id="top">
+        <div>
+            <p class="eyebrow">Days 1-12 Foundation</p>
+            <h1>Personal Portfolio Starter</h1>
+            <p class="subtitle">HTML5 + CSS3 + JavaScript + PHP + MySQL</p>
+            <span class="badge">Internship Task 1</span>
+        </div>
+        <a class="cta" href="view.php">Open Data Dashboard</a>
+    </header>
+
+    <nav class="site-nav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact Form</a>
+        <a href="#media">Multimedia</a>
+        <a href="#table-demo">Table Demo</a>
+    </nav>
+
+    <main>
+        <section id="about" class="panel">
+            <article>
+                <h2>About This Project</h2>
+                <p>
+                    This page demonstrates semantic structure, modern layout systems, form handling,
+                    responsive design, and dynamic behavior.
+                </p>
+                <p id="dynamicMessage" style="font-style: italic;">Inline CSS example: this text is styled inline.</p>
+                <button id="jsButton" type="button">Run JavaScript Demo</button>
+                <ul id="skillsList"></ul>
+            </article>
+        </section>
+
+        <section id="projects" class="panel grid-two">
+            <article class="card">
+                <h3>Project Card 1</h3>
+                <p>Flexbox and Grid are used for adaptive card layouts.</p>
+            </article>
+            <article class="card">
+                <h3>Project Card 2</h3>
+                <p>Transitions and hover effects are applied for interaction feedback.</p>
+            </article>
+        </section>
+
+        <section id="contact" class="panel">
+            <article>
+                <h2>Contact Form (POST)</h2>
+                <form id="portfolioForm" action="submit.php" method="POST" onsubmit="return validateForm()" novalidate>
+                    <div class="form-grid">
+                        <label>
+                            Full Name
+                            <input type="text" name="name" id="name" placeholder="Enter full name" required>
+                        </label>
+
+                        <label>
+                            Email
+                            <input type="email" name="email" id="email" placeholder="Enter email" required>
+                        </label>
+
+                        <label>
+                            Password
+                            <input type="password" name="password" id="password" placeholder="Minimum 8 characters" required>
+                        </label>
+
+                        <label>
+                            Role
+                            <select name="role" id="role" required>
+                                <option value="">Select role</option>
+                                <option value="frontend">Frontend Developer</option>
+                                <option value="backend">Backend Developer</option>
+                                <option value="fullstack">Full Stack Developer</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <label>
+                        Bio
+                        <textarea name="bio" id="bio" rows="4" placeholder="Write a short bio"></textarea>
+                    </label>
+
+                    <fieldset>
+                        <legend>Gender</legend>
+                        <label><input type="radio" name="gender" value="male" required> Male</label>
+                        <label><input type="radio" name="gender" value="female" required> Female</label>
+                        <label><input type="radio" name="gender" value="other" required> Other</label>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Interests</legend>
+                        <label><input type="checkbox" name="interests[]" value="html"> HTML</label>
+                        <label><input type="checkbox" name="interests[]" value="css"> CSS</label>
+                        <label><input type="checkbox" name="interests[]" value="javascript"> JavaScript</label>
+                        <label><input type="checkbox" name="interests[]" value="php"> PHP</label>
+                    </fieldset>
+
+                    <label class="checkbox-row">
+                        <input type="checkbox" name="newsletter" id="newsletter" value="yes">
+                        Subscribe to newsletter
+                    </label>
+
+                    <p id="validationMessage" class="validation-message"></p>
+                    <button type="submit">Submit Form</button>
+                </form>
+            </article>
+        </section>
+
+        <section id="media" class="panel">
+            <article>
+                <h2>Multimedia</h2>
+                <div class="media-grid">
+                    <div>
+                        <h3>Audio</h3>
+                        <audio controls>
+                            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+                            Your browser does not support the audio tag.
+                        </audio>
+                    </div>
+                    <div>
+                        <h3>Video</h3>
+                        <video controls width="100%">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div>
+                        <h3>Iframe</h3>
+                        <iframe src="https://www.wikipedia.org" title="Example iframe" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="table-demo" class="panel">
+            <article>
+                <h2>Table Demo</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Topic</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>HTML5 Fundamentals</td>
+                            <td>In Progress</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>CSS3 & Responsive Design</td>
+                            <td>In Progress</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total Modules: 2</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built for Internship Task 1 | <a href="hello.php">PHP Hello Test</a> | <a href="view.php">Manage Submissions</a></p>
+        <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="task.js" defer></script>
+</body>
+</html>
