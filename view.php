@@ -1,6 +1,12 @@
 <?php
 require_once 'db.php';
 
+/**
+ * Variables from db.php
+ * @var mixed $conn Database connection resource or false
+ * @var string $storageFile Path to local storage JSON file
+ */
+
 if (!$conn) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $action = $_POST['action'] ?? '';
@@ -107,29 +113,30 @@ if (!$conn) {
                 <?php else: ?>
                     <?php foreach ($rows as $row): ?>
                         <tr>
-                            <td><?php echo (int)$row['profile_id']; ?></td>
-                            <td><?php echo htmlspecialchars($row['name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['email']); ?></td>
-                            <td><?php echo htmlspecialchars($row['role']); ?></td>
+                            <td><?php echo (int)($row['profile_id'] ?? 0); ?></td>
+                            <td><?php echo htmlspecialchars((string)($row['name'] ?? '')); ?></td>
+                            <td><?php echo htmlspecialchars((string)($row['email'] ?? '')); ?></td>
+                            <td><?php echo htmlspecialchars((string)($row['role'] ?? '')); ?></td>
                             <td><?php echo htmlspecialchars((string)($row['gender'] ?? '')); ?></td>
-                            <td><?php echo htmlspecialchars((string)$row['interests']); ?></td>
-                            <td><?php echo ((int)$row['newsletter'] === 1) ? 'Yes' : 'No'; ?></td>
+                            <td><?php echo htmlspecialchars((string)($row['interests'] ?? '')); ?></td>
+                            <td><?php echo ((int)($row['newsletter'] ?? 0) === 1) ? 'Yes' : 'No'; ?></td>
                             <td><?php echo htmlspecialchars((string)$row['bio']); ?></td>
                             <td><?php echo htmlspecialchars((string)$row['created_at']); ?></td>
                             <td>
+                                <?php $currentRole = (string)($row['role'] ?? ''); ?>
                                 <form action="view.php" method="POST" style="margin-bottom:0.4rem;">
                                     <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="profile_id" value="<?php echo (int)$row['profile_id']; ?>">
+                                    <input type="hidden" name="profile_id" value="<?php echo (int)($row['profile_id'] ?? 0); ?>">
                                     <button type="submit">Delete</button>
                                 </form>
 
                                 <form action="view.php" method="POST">
                                     <input type="hidden" name="action" value="update">
-                                    <input type="hidden" name="profile_id" value="<?php echo (int)$row['profile_id']; ?>">
+                                    <input type="hidden" name="profile_id" value="<?php echo (int)($row['profile_id'] ?? 0); ?>">
                                     <select name="role" required>
-                                        <option value="Frontend Developer">Frontend Developer</option>
-                                        <option value="Backend Developer">Backend Developer</option>
-                                        <option value="Full Stack Developer">Full Stack Developer</option>
+                                        <option value="Frontend Developer" <?php echo $currentRole === 'Frontend Developer' ? 'selected' : ''; ?>>Frontend Developer</option>
+                                        <option value="Backend Developer" <?php echo $currentRole === 'Backend Developer' ? 'selected' : ''; ?>>Backend Developer</option>
+                                        <option value="Full Stack Developer" <?php echo $currentRole === 'Full Stack Developer' ? 'selected' : ''; ?>>Full Stack Developer</option>
                                     </select>
                                     <textarea name="bio" rows="2" placeholder="Update bio"></textarea>
                                     <button type="submit">Update</button>

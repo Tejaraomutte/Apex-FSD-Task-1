@@ -36,8 +36,12 @@ if (!$conn) {
 if ($conn) {
     if (!mysqli_query($conn, "CREATE DATABASE IF NOT EXISTS `$dbName`")) {
         $dbError = 'Unable to create database: ' . mysqli_error($conn);
+        mysqli_close($conn);
+        $conn = false;
     } elseif (!mysqli_select_db($conn, $dbName)) {
         $dbError = 'Unable to select database: ' . mysqli_error($conn);
+        mysqli_close($conn);
+        $conn = false;
     } else {
         mysqli_set_charset($conn, 'utf8mb4');
 
