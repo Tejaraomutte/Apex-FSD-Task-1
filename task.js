@@ -1,19 +1,6 @@
-const skills = ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"];
-
 function showMessage() {
     const target = document.getElementById("dynamicMessage");
     target.textContent = "JavaScript is active: click, keyup, and change events are now wired.";
-}
-
-function renderSkills() {
-    const list = document.getElementById("skillsList");
-    list.innerHTML = "";
-
-    for (let i = 0; i < skills.length; i += 1) {
-        const item = document.createElement("li");
-        item.textContent = `${i + 1}. ${skills[i]}`;
-        list.appendChild(item);
-    }
 }
 
 function validateEmail(email) {
@@ -67,7 +54,6 @@ function initEvents() {
 }
 
 function initPortfolioApp() {
-    renderSkills();
     initEvents();
 }
 

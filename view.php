@@ -2,55 +2,71 @@
 require_once 'db.php';
 
 if (!$conn) {
-    echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Database Not Available</title><link rel="stylesheet" href="style.css"></head><body><main class="panel" style="width:min(760px,92%);margin:2rem auto;"><h2>MySQL Server Not Running</h2><p>' . htmlspecialchars($dbError ?: 'Unable to connect to the database server.') . '</p><p>Start MySQL in XAMPP/WAMP and import schema.sql in phpMyAdmin.</p><p><a class="cta" href="index.html">Back to form</a></p></main></body></html>';
-    exit;
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $action = $_POST['action'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_POST['action'] ?? '';
+        if ($action === 'delete') {
+            $profileId = (int)($_POST['profile_id'] ?? 0);
+            portfolio_storage_delete_record($storageFile, $profileId);
+        }
 
-    if ($action === 'delete') {
-        $profileId = (int)($_POST['profile_id'] ?? 0);
-        $deleteStmt = mysqli_prepare($conn, 'DELETE FROM profiles WHERE id = ?');
-        mysqli_stmt_bind_param($deleteStmt, 'i', $profileId);
-        mysqli_stmt_execute($deleteStmt);
-        mysqli_stmt_close($deleteStmt);
+        if ($action === 'update') {
+            $profileId = (int)($_POST['profile_id'] ?? 0);
+            $role = trim($_POST['role'] ?? '');
+            $bio = trim($_POST['bio'] ?? '');
+
+            portfolio_storage_update_record($storageFile, $profileId, $role, $bio);
+        }
     }
 
-    if ($action === 'update') {
-        $profileId = (int)($_POST['profile_id'] ?? 0);
-        $role = trim($_POST['role'] ?? '');
-        $bio = trim($_POST['bio'] ?? '');
+    $rows = portfolio_storage_all_records($storageFile);
+} else {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $action = $_POST['action'] ?? '';
 
-        $updateStmt = mysqli_prepare($conn, 'UPDATE profiles SET role = ?, bio = ? WHERE id = ?');
-        mysqli_stmt_bind_param($updateStmt, 'ssi', $role, $bio, $profileId);
-        mysqli_stmt_execute($updateStmt);
-        mysqli_stmt_close($updateStmt);
+        if ($action === 'delete') {
+            $profileId = (int)($_POST['profile_id'] ?? 0);
+            $deleteStmt = mysqli_prepare($conn, 'DELETE FROM profiles WHERE id = ?');
+            mysqli_stmt_bind_param($deleteStmt, 'i', $profileId);
+            mysqli_stmt_execute($deleteStmt);
+            mysqli_stmt_close($deleteStmt);
+        }
+
+        if ($action === 'update') {
+            $profileId = (int)($_POST['profile_id'] ?? 0);
+            $role = trim($_POST['role'] ?? '');
+            $bio = trim($_POST['bio'] ?? '');
+
+            $updateStmt = mysqli_prepare($conn, 'UPDATE profiles SET role = ?, bio = ? WHERE id = ?');
+            mysqli_stmt_bind_param($updateStmt, 'ssi', $role, $bio, $profileId);
+            mysqli_stmt_execute($updateStmt);
+            mysqli_stmt_close($updateStmt);
+        }
     }
-}
 
-$query = '
-SELECT
-    p.id AS profile_id,
-    u.name,
-    u.email,
-    p.role,
-    p.gender,
-    p.interests,
-    p.newsletter,
-    p.bio,
-    p.created_at
-FROM profiles p
-JOIN users u ON p.user_id = u.id
-ORDER BY p.id DESC
-';
+    $query = '
+    SELECT
+        p.id AS profile_id,
+        u.name,
+        u.email,
+        p.role,
+        p.gender,
+        p.interests,
+        p.newsletter,
+        p.bio,
+        p.created_at
+    FROM profiles p
+    JOIN users u ON p.user_id = u.id
+    ORDER BY p.id DESC
+    ';
 
-$result = mysqli_query($conn, $query);
-$rows = [];
+    $result = mysqli_query($conn, $query);
+    $rows = [];
 
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $rows[] = $row;
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
     }
 }
 ?>
@@ -95,7 +111,7 @@ if ($result) {
                             <td><?php echo htmlspecialchars($row['name']); ?></td>
                             <td><?php echo htmlspecialchars($row['email']); ?></td>
                             <td><?php echo htmlspecialchars($row['role']); ?></td>
-                            <td><?php echo htmlspecialchars($row['gender']); ?></td>
+                            <td><?php echo htmlspecialchars((string)($row['gender'] ?? '')); ?></td>
                             <td><?php echo htmlspecialchars((string)$row['interests']); ?></td>
                             <td><?php echo ((int)$row['newsletter'] === 1) ? 'Yes' : 'No'; ?></td>
                             <td><?php echo htmlspecialchars((string)$row['bio']); ?></td>
