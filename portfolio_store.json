@@ -1,4 +1,17 @@
 {
-  "next_id": 1,
-  "records": []
+    "next_id": 2,
+    "records": [
+        {
+            "name": "MUTTE TEJASATHVIKA",
+            "email": "tejaraomutte@gmail.com",
+            "password_length": 9,
+            "role": "Full Stack Developer",
+            "gender": "female",
+            "bio": "Enthusiastic learnenr",
+            "interests": "javascript",
+            "newsletter": 1,
+            "created_at": "2026-05-04 17:28:20",
+            "profile_id": 1
+        }
+    ]
 }
